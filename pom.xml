@@ -47,6 +47,17 @@
         <version>${mysql.connector.version}</version>
     </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${servlet.jstl.version}</version>
+        </dependency>
+
         <!--Logger-->
         <dependency>
             <groupId>org.slf4j</groupId>

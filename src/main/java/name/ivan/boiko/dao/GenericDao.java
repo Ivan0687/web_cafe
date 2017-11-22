@@ -5,15 +5,15 @@ import name.ivan.boiko.model.Model;
 import java.io.Serializable;
 import java.util.Collection;
 
-public interface GenericDao<K extends Serializable, T extends Model> {
+public interface GenericDao<K extends Serializable, V extends Serializable> {
 
-    void create(T entity);
+    void create(V value);
 
-    T read(K key);
+    V read(K key);
 
-    Collection<T> read();
+    Collection<V> read();
 
-    void update(K key, T entity);
+    void update(K key, V value);
 
     void delete(K key);
 
