@@ -1,5 +1,6 @@
 package name.ivan.boiko.model;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class CoffeeOrder extends Model{
 
     private Map<CoffeeType, Integer> items;
 
-    private double cost;
+    private BigDecimal cost;
 
     public int getId() {
         return id;
@@ -49,11 +50,11 @@ public class CoffeeOrder extends Model{
         this.deliveryAddress = deliveryAddress;
     }
 
-    public double getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 }

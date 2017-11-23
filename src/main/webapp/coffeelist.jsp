@@ -17,7 +17,7 @@
                 <th>Цена</th>
                 <th>Количество</th>
             </tr>
-            <c:forEach var="item" items="${coffeeItems}">
+            <c:forEach var="item" items="${coffeTypes}">
             <tr style="background-color: #F0F0F0">
             <td>галочка</td>
                 <td>${item.name}</td>

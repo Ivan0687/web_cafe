@@ -1,12 +1,14 @@
 package name.ivan.boiko.model;
 
+import java.math.BigDecimal;
+
 public class CoffeeType extends Model{
 
     private int id;
 
     private String name;
 
-    private double price;
+    private BigDecimal price;
 
     private boolean isDisabled;
 
@@ -26,11 +28,11 @@ public class CoffeeType extends Model{
         this.name = name;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

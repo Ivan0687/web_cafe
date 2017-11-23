@@ -13,7 +13,7 @@ public interface GenericDao<K extends Serializable, V extends Serializable> {
 
     Collection<V> read();
 
-    void update(K key, V value);
+    void update(V value);
 
     void delete(K key);
 
