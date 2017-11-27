@@ -70,7 +70,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `coffee`.`Configuration`
+-- Table `coffee`.`CoffeeConfiguration`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `coffee`.`Configuration` (
   `id` VARCHAR(20) NOT NULL,

@@ -1,14 +1,18 @@
 package name.ivan.boiko.model;
 
+import java.math.BigDecimal;
+
 public class CoffeeOrderItem extends Model{
 
     private int id;
 
-    private int orderId;
+    private CoffeeOrder coffeeOrder;
 
-    private int typeId;
+    private CoffeeType coffeeType;
 
     private int quantity;
+
+    private BigDecimal itemCost;
 
     public int getId() {
         return id;
@@ -18,20 +22,20 @@ public class CoffeeOrderItem extends Model{
         this.id = id;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public CoffeeOrder getCoffeeOrder() {
+        return coffeeOrder;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setCoffeeOrder(CoffeeOrder coffeeOrder) {
+        this.coffeeOrder = coffeeOrder;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public CoffeeType getCoffeeType() {
+        return coffeeType;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setCoffeeType(CoffeeType coffeeType) {
+        this.coffeeType = coffeeType;
     }
 
     public int getQuantity() {
@@ -40,5 +44,13 @@ public class CoffeeOrderItem extends Model{
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public BigDecimal getItemCost() {
+        return itemCost;
+    }
+
+    public void setItemCost(BigDecimal itemCost) {
+        this.itemCost = itemCost;
     }
 }

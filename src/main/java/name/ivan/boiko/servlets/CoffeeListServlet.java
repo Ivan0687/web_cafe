@@ -1,49 +1,40 @@
 package name.ivan.boiko.servlets;
 
-import com.google.gson.Gson;
+import name.ivan.boiko.Service.PooledDataSource;
 import name.ivan.boiko.dao.CoffeeTypeDao;
+import name.ivan.boiko.dao.ConfigurationDao;
 import name.ivan.boiko.dao.jdbcDao.CoffeeTypeJdbcDaoImpl;
+import name.ivan.boiko.dao.jdbcDao.ConfigurationJdbcDaoImpl;
 import name.ivan.boiko.model.CoffeeType;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/coffeelist")
 public class CoffeeListServlet extends HttpServlet {
 
-//    private CoffeeTypeDao dao = new CoffeeTypeJdbcDaoImpl();
+    private DataSource dataSource = PooledDataSource.getDataSource();
 
-    private Gson gson = new Gson();
+    private final CoffeeTypeDao coffeeTypeDao = new CoffeeTypeJdbcDaoImpl(dataSource);
+    private final ConfigurationDao configurationDao = new ConfigurationJdbcDaoImpl(dataSource);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-//        ArrayList<CoffeeType> coffeeTypes = (ArrayList<CoffeeType>) dao.read();
+        List<CoffeeType> coffeeTypes = coffeeTypeDao.readAllEnabled();
 
-        ArrayList<CoffeeType> coffeeTypes = new ArrayList<>();
+        int freeCup = configurationDao.read("n").getValue();
 
-        CoffeeType coffeeType = new CoffeeType();
-        coffeeType.setId(1);
-        coffeeType.setName("coffee type");
-        coffeeType.setPrice(new BigDecimal(32.65).round(new MathContext(4)));
+        req.setAttribute("freeCup", freeCup);
 
-        coffeeTypes.add(coffeeType);
-
-        String coffeeTypesJson = gson.toJson(coffeeTypes);
-
-        req.setAttribute("coffeeItems", coffeeTypes);
-
-
-//        resp.setHeader("coffeeItems", coffeeTypesJson);
+        req.setAttribute("coffeeTypes", coffeeTypes);
 
         req.getRequestDispatcher("coffeelist.jsp").forward(req,resp);
     }

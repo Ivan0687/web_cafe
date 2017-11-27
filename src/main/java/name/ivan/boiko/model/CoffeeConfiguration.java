@@ -1,6 +1,6 @@
 package name.ivan.boiko.model;
 
-public class Configuration extends Model{
+public class CoffeeConfiguration extends Model{
 
     private String id;
 

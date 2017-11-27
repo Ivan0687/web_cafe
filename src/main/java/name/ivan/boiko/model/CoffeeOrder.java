@@ -2,19 +2,21 @@ package name.ivan.boiko.model;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 public class CoffeeOrder extends Model{
 
     private int id;
 
-    private Date orderDate;
+    private Timestamp orderDate;
 
     private String name;
 
     private String deliveryAddress;
 
-    private Map<CoffeeType, Integer> items;
+    private List<CoffeeOrderItem> items;
 
     private BigDecimal cost;
 
@@ -26,11 +28,11 @@ public class CoffeeOrder extends Model{
         this.id = id;
     }
 
-    public Date getOrderDate() {
+    public Timestamp getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -50,6 +52,14 @@ public class CoffeeOrder extends Model{
         this.deliveryAddress = deliveryAddress;
     }
 
+    public List<CoffeeOrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<CoffeeOrderItem> items) {
+        this.items = items;
+    }
+
     public BigDecimal getCost() {
         return cost;
     }
@@ -57,4 +67,5 @@ public class CoffeeOrder extends Model{
     public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
+
 }

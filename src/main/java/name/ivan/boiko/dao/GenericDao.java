@@ -1,17 +1,15 @@
 package name.ivan.boiko.dao;
 
-import name.ivan.boiko.model.Model;
-
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 public interface GenericDao<K extends Serializable, V extends Serializable> {
 
-    void create(V value);
+    void save(V value);
 
     V read(K key);
 
-    Collection<V> read();
+    List<V> readAll();
 
     void update(V value);
 

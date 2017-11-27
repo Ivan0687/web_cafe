@@ -43,4 +43,14 @@ public class CoffeeType extends Model{
     public void setDisabled(boolean disabled) {
         isDisabled = disabled;
     }
+
+    @Override
+    public String toString() {
+        return "CoffeeType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", isDisabled=" + isDisabled +
+                "} ";
+    }
 }

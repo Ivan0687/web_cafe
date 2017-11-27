@@ -3,21 +3,26 @@ package name.ivan.boiko.dao.jdbcDao;
 import name.ivan.boiko.dao.CoffeeTypeDao;
 import name.ivan.boiko.model.CoffeeType;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 public class CoffeeTypeJdbcDaoImpl extends AbstractGenericJdbcDao<Integer, CoffeeType> implements CoffeeTypeDao {
 
+    public CoffeeTypeJdbcDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
     @Override
-    public void create(CoffeeType coffeeType) {
+    public void save(CoffeeType coffeeType) {
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "insert into CoffeeType (name, price) values (?, ?)")) {
+                     "INSERT INTO coffeeType (name, price) VALUES (?, ?)")) {
 
             statement.setString(1, coffeeType.getName());
             statement.setBigDecimal(2, coffeeType.getPrice());
@@ -34,7 +39,7 @@ public class CoffeeTypeJdbcDaoImpl extends AbstractGenericJdbcDao<Integer, Coffe
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "select * from CoffeeType where id = ?")) {
+                     "SELECT * FROM coffeeType WHERE id = ?")) {
 
             statement.setInt(1, id);
 
@@ -60,11 +65,11 @@ public class CoffeeTypeJdbcDaoImpl extends AbstractGenericJdbcDao<Integer, Coffe
     }
 
     @Override
-    public Collection<CoffeeType> read() {
+    public List<CoffeeType> readAll() {
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "select * from CoffeeType")) {
+                     "SELECT * FROM coffeeType")) {
 
             try (ResultSet resultSet = statement.executeQuery()) {
 
@@ -89,19 +94,48 @@ public class CoffeeTypeJdbcDaoImpl extends AbstractGenericJdbcDao<Integer, Coffe
     }
 
     @Override
+    public List<CoffeeType> readAllEnabled() {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT * FROM coffeeType WHERE disabled NOT LIKE 'Y'")) {
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                ArrayList<CoffeeType> list = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    CoffeeType coffeeType = new CoffeeType();
+                    coffeeType.setId(resultSet.getInt("id"));
+                    coffeeType.setName(resultSet.getString("name"));
+                    coffeeType.setPrice(resultSet.getBigDecimal("price"));
+
+                    list.add(coffeeType);
+                }
+                return list;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void update(CoffeeType coffeeType) {
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "update CoffeeType set name = ?, price = ?, disabled = ? where id = ?")) {
+                     "UPDATE coffeeType SET name = ?, price = ?, disabled = ? WHERE id = ?")) {
 
             statement.setString(1, coffeeType.getName());
             statement.setBigDecimal(2, coffeeType.getPrice());
 
-            if (coffeeType.isDisabled())
+            if (coffeeType.isDisabled()) {
                 statement.setString(3, "Y");
-                statement.setInt(4, coffeeType.getId());
-                statement.executeUpdate();
+            } else {
+                statement.setString(3, "N");
+            }
+            statement.setInt(4, coffeeType.getId());
+            statement.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -113,7 +147,7 @@ public class CoffeeTypeJdbcDaoImpl extends AbstractGenericJdbcDao<Integer, Coffe
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "delete from CoffeeType where id = ?")) {
+                     "DELETE FROM coffeeType WHERE id = ?")) {
 
             statement.setInt(1, id);
 
@@ -123,6 +157,4 @@ public class CoffeeTypeJdbcDaoImpl extends AbstractGenericJdbcDao<Integer, Coffe
             throw new RuntimeException(e);
         }
     }
-
-
 }

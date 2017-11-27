@@ -1,4 +1,6 @@
 package name.ivan.boiko.dao;
 
-public interface ConfigurationDao extends GenericDao<String, Integer> {
+import name.ivan.boiko.model.CoffeeConfiguration;
+
+public interface ConfigurationDao extends GenericDao<String, CoffeeConfiguration> {
 }
