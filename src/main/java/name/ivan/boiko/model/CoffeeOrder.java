@@ -1,23 +1,32 @@
 package name.ivan.boiko.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
-public class CoffeeOrder extends Model{
+@Entity
+@Table
+public class CoffeeOrder implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column
     private Timestamp orderDate;
 
+    @Column
     private String name;
 
+    @Column
     private String deliveryAddress;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coffeeOrder")
     private List<CoffeeOrderItem> items;
 
+    @Column
     private BigDecimal cost;
 
     public int getId() {

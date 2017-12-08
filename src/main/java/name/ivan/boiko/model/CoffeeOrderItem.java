@@ -1,17 +1,29 @@
 package name.ivan.boiko.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CoffeeOrderItem extends Model{
+@Entity
+@Table
+public class CoffeeOrderItem implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id", nullable = false)
     private CoffeeOrder coffeeOrder;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "type_id")
     private CoffeeType coffeeType;
 
+    @Column
     private int quantity;
 
+    @Column
     private BigDecimal itemCost;
 
     public int getId() {

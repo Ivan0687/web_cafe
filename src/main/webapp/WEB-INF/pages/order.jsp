@@ -11,7 +11,8 @@
 <html>
 <head>
     <title>Order</title>
-    <link type="text/css" href="styles.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet">
+
 </head>
 <body>
 <div align="center">

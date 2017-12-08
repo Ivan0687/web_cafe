@@ -15,9 +15,19 @@
         <servlet.api.version>3.1.0</servlet.api.version>
         <servlet.jstl.version>1.2</servlet.jstl.version>
 
+        <hibernate.version>5.2.10.Final</hibernate.version>
+
         <mysql.connector.version>5.1.42</mysql.connector.version>
+        <dbcp.varsion>1.3</dbcp.varsion>
+
+        <spring.version>4.3.10.RELEASE</spring.version>
+        <spring.data.version>1.11.6.RELEASE</spring.data.version>
 
         <slf4j.version>1.7.25</slf4j.version>
+
+        <junit.version>4.12</junit.version>
+        <mockito.version>2.8.47</mockito.version>
+        <spring.test.version>4.3.8.RELEASE</spring.test.version>
 
     </properties>
 
@@ -42,6 +52,7 @@
 
     <dependencies>
 
+        <!--Database-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -50,9 +61,16 @@
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
-            <version>1.3</version>
+            <version>${dbcp.varsion}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!--Servlet-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -64,13 +82,34 @@
             <version>${servlet.jstl.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <!--Spring-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring.data.version}</version>
+        </dependency>
+
+        <!--JSON-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
         </dependency>
-
 
         <!--Logger-->
         <dependency>
@@ -82,6 +121,26 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
+        </dependency>
+
+        <!--Test-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.test.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

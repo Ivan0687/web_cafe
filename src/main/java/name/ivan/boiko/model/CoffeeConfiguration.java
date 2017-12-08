@@ -1,9 +1,17 @@
 package name.ivan.boiko.model;
 
-public class CoffeeConfiguration extends Model{
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name = "configuration")
+public class CoffeeConfiguration implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
+    @Column
     private int value;
 
     public String getId() {

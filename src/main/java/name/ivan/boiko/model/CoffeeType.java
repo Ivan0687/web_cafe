@@ -1,16 +1,25 @@
 package name.ivan.boiko.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CoffeeType extends Model{
+@Entity
+@Table(name = "coffeetype")
+public class CoffeeType implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column
     private String name;
 
+    @Column
     private BigDecimal price;
 
-    private boolean isDisabled;
+    @Column
+    private String disabled;
 
     public int getId() {
         return id;
@@ -36,21 +45,12 @@ public class CoffeeType extends Model{
         this.price = price;
     }
 
-    public boolean isDisabled() {
-        return isDisabled;
+    public String getDisabled() {
+        return disabled;
     }
 
-    public void setDisabled(boolean disabled) {
-        isDisabled = disabled;
+    public void setDisabled(String disabled) {
+        this.disabled = disabled;
     }
 
-    @Override
-    public String toString() {
-        return "CoffeeType{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", isDisabled=" + isDisabled +
-                "} ";
-    }
 }

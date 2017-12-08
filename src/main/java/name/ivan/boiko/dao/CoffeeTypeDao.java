@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface CoffeeTypeDao extends GenericDao<Integer, CoffeeType> {
 
-    List<CoffeeType> readAllEnabled();
-
+    List<CoffeeType> readAllByDisabledNotLike(String s);
 }
